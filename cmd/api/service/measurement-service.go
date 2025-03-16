@@ -15,19 +15,19 @@ func NewMeasurementService(s storage.Storage) *MeasurementService {
 }
 
 type CreateMeasurementReq struct {
-	MassDensityPM1_0   float64   `json:"md_pm1_0"`
-	MassDensityPM2_5   float64   `json:"md_pm2_5"`
-	MassDensityPM4_0   float64   `json:"md_pm4_0"`
-	MassDensityPM10    float64   `json:"md_pm10"`
-	MassDensityUnit    string    `json:"md_unit"`
-	ParticleCountPM0_5 float64   `json:"pc_pm0_5"`
-	ParticleCountPM1_0 float64   `json:"pc_pm1_0"`
-	ParticleCountPM2_5 float64   `json:"pc_pm2_5"`
-	ParticleCountPM4_0 float64   `json:"pc_pm4_0"`
-	ParticleCountPM10  float64   `json:"pc_pm10"`
-	ParticleCountUnit  string    `json:"pc_unit"`
-	ParticleSize       float64   `json:"ps"`
-	ParticleSizeUnit   string    `json:"ps_unit"`
+	MassDensityPM1_0   float64   `json:"mass_density_pm1_0"`
+	MassDensityPM2_5   float64   `json:"mass_density_pm2_5"`
+	MassDensityPM4_0   float64   `json:"mass_density_pm4_0"`
+	MassDensityPM10    float64   `json:"mass_density_pm10"`
+	MassDensityUnit    string    `json:"mass_density_unit"`
+	ParticleCountPM0_5 float64   `json:"particle_count_pm0_5"`
+	ParticleCountPM1_0 float64   `json:"particle_count_pm1_0"`
+	ParticleCountPM2_5 float64   `json:"particle_count_pm2_5"`
+	ParticleCountPM4_0 float64   `json:"particle_count_pm4_0"`
+	ParticleCountPM10  float64   `json:"particle_count_pm10"`
+	ParticleCountUnit  string    `json:"particle_count_unit"`
+	ParticleSize       float64   `json:"particle_size"`
+	ParticleSizeUnit   string    `json:"particle_size_unit"`
 	Timestamp          time.Time `json:"timestamp"`
 }
 

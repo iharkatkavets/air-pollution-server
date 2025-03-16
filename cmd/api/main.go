@@ -17,6 +17,7 @@ const version = "1.0.0"
 
 type config struct {
 	port int
+	db   string
 	env  string
 }
 
@@ -45,6 +46,7 @@ func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 4001, "Server port to listen on")
 	flag.StringVar(&cfg.env, "env", "development", "Application environment {development|production}")
+	flag.StringVar(&cfg.db, "db", "api.db", "The path do db file")
 
 	flag.Parse()
 
