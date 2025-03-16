@@ -24,6 +24,11 @@ build_back:
 	@go build -o dist/api ./cmd/api
 	@echo "Back end built!"
 
+release_api:
+	@echo "Building api release..."
+	@CGO_ENABLED=1 GOOS=linux GOARCH=arm64 CC=musl-gcc go build -tags "sqlite_omit_load_extension" -ldflags "-extldflags -static" -o dist/api-server ./cmd/api/
+	@echo "Back end built!"
+
 ## start: starts front and back end
 start: start_front start_back
 	
