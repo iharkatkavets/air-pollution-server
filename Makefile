@@ -4,7 +4,7 @@ DB="api.db"
 ENV="development"
 
 ## build: builds all binaries
-build: clean build_front build_back
+build: clean build_front build_api
 	@printf "All binaries built!\n"
 
 ## clean: cleans all binaries and runs go clean
@@ -20,8 +20,8 @@ build_front:
 	@go build -o dist/web-server ./cmd/web
 	@echo "Front end built!"
 
-## build_back: builds the back end
-build_back:
+## build_api: builds the back end
+build_api:
 	@echo "Building back end..."
 	@go build -o dist/api-server ./cmd/api
 	@echo "Back end built!"
@@ -32,7 +32,7 @@ release_api:
 	@echo "Back end built!"
 
 ## start: starts front and back end
-start: start_front start_back
+start: start_front start_api
 	
 ## start_front: starts the front end
 start_front: build_front
@@ -40,14 +40,14 @@ start_front: build_front
 	@env ./dist/web-server -port=${WEB_PORT} &
 	@echo "Front end running!"
 
-## start_back: starts the back end
-start_back: build_back
+## start_api: starts the back end
+start_api: build_api
 	@echo "Starting the back end..."
 	@env ./dist/api-server -port=${API_PORT} -db=${DB} -env=${ENV}&
 	@echo "Back end running!"
 
 ## stop: stops the front and back end
-stop: stop_front stop_back
+stop: stop_front stop_api
 	@echo "All applications stopped"
 
 ## stop_front: stops the front end
@@ -56,8 +56,8 @@ stop_front:
 	@-pkill -SIGTERM -f "web-server -port=${WEB_PORT}"
 	@echo "Stopped front end"
 
-## stop_back: stops the back end
-stop_back:
+## stop_api: stops the back end
+stop_api:
 	@echo "Stopping the back end..."
 	@-pkill -SIGTERM -f "api-server -port=${API_PORT}" -db=${DB} -env=${ENV}
 	@echo "Stopped back end"

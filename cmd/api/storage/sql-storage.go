@@ -2,9 +2,12 @@ package storage
 
 import (
 	"database/sql"
-	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"sensor/cmd/api/models"
+	"strconv"
+	"strings"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type SqlStorage struct {
@@ -44,8 +47,23 @@ func (s *SqlStorage) CreateMeasurement(m *models.Measurement) error {
 	return err
 }
 
-func (s *SqlStorage) GetAllMeasurements() ([]models.Measurement, error) {
-	rows, err := s.db.Query("SELECT id, sensor, parameter, value, unit, timestamp FROM measurement")
+func (s *SqlStorage) GetAllMeasurements(filters map[string]string) ([]models.Measurement, error) {
+	query := "SELECT id, sensor, parameter, value, unit, timestamp FROM measurement"
+	var args []interface{}
+
+	var conditions []string
+	i := 1
+	for key, value := range filters {
+		conditions = append(conditions, key+" = $"+strconv.Itoa(i))
+		args = append(args, value)
+		i++
+	}
+
+	if len(conditions) > 0 {
+		query += " WHERE " + strings.Join(conditions, " AND ")
+	}
+
+	rows, err := s.db.Query(query, args...)
 	if err != nil {
 		return nil, err
 	}

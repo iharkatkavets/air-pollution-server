@@ -55,8 +55,8 @@ func (s *MeasurementService) CreateMeasurement(req *CreateMeasurementReq) error 
 	return nil
 }
 
-func (s *MeasurementService) GetAllMeasurements() ([]models.Measurement, error) {
-	readings, err := s.storage.GetAllMeasurements()
+func (s *MeasurementService) GetAllMeasurements(filters map[string]string) ([]models.Measurement, error) {
+	readings, err := s.storage.GetAllMeasurements(filters)
 	if err != nil {
 		return nil, err
 	}

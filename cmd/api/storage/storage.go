@@ -7,5 +7,5 @@ import (
 
 type Storage interface {
 	CreateMeasurement(m *models.Measurement) error
-	GetAllMeasurements() ([]models.Measurement, error)
+	GetAllMeasurements(filters map[string]string) ([]models.Measurement, error)
 }
